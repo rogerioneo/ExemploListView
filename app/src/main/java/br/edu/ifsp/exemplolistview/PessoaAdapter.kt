@@ -18,15 +18,26 @@ class PessoaAdapter(val contexto: Context,
             val layoutInflater = contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
             view = layoutInflater.inflate(leiaute, parent, false)
+
+            val holder = PessoaHolder()
+            holder.nomeTextView = view?.findViewById<TextView>(R.id.nomeTv)
+            holder.idadeTextView = view?.findViewById<TextView>(R.id.idadeTv)
+
+            (view as View).setTag(holder)
         }
 
-        val nomeTv = view?.findViewById<TextView>(R.id.nomeTv)
-        val idateTv = view?.findViewById<TextView>(R.id.idadeTv)
+        var holder = view.getTag() as PessoaHolder
 
         val pessoa: Pessoa = lista[position]
-        nomeTv?.text = pessoa.nome
-        idateTv?.text = pessoa.idade.toString()
 
-        return view?:super.getView(position, convertView, parent)
+        holder.nomeTextView?.text = pessoa.nome
+        holder.idadeTextView?.text = pessoa.idade.toString()
+
+        return view
+    }
+
+    private class PessoaHolder{
+        var nomeTextView: TextView? = null
+        var idadeTextView: TextView? = null
     }
 }
