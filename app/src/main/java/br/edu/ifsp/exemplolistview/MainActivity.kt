@@ -6,7 +6,7 @@ import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    val listaItens = mutableListOf<String>()
+    val listaPessoas = mutableListOf<Pessoa>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,13 +14,13 @@ class MainActivity : AppCompatActivity() {
 
         // Criando uma lista para usar como data
         for(i in 1..50) {
-            listaItens.add("Item: ${i}")
+            listaPessoas.add(Pessoa("Pessoa ${i}", i))
         }
 
         //Instanciando um ArrayAdapter
-        val adapter: ArrayAdapter<String> = ArrayAdapter(this,
-            android.R.layout.simple_list_item_1,
-            listaItens)
+        val adapter: PessoaAdapter = PessoaAdapter(this,
+            R.layout.item_layout,
+            listaPessoas)
 
         itensLv.adapter = adapter
 
